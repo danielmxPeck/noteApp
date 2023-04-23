@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import ReactMde from "react-mde";
 import Showdown from "showdown";
+import "../App.css";
 
-const Editor = ({ currentNote, updateNote }) => {
-  const [selectedTab, setSelectedTab] = useState("Write");
+const Editor = (  { currentNote, updateNote }) => {
+  const [selectedTab, setSelectedTab] = useState("write");
 
   const converter = new Showdown.Converter({
     tables: true,
     simplifiedAutoLink: true,
-    strikethrough: true,
     tasklists: true,
-    smartIndentationFix: true,
+    strikethrough: true,
   });
 
   return (
@@ -21,7 +21,7 @@ const Editor = ({ currentNote, updateNote }) => {
         selectedTab={selectedTab}
         onTabChange={setSelectedTab}
         generateMarkdownPreview={(markdown) =>
-          Promise.resolve(conveter.markHtml(markdown))
+          Promise.resolve(converter.makeHtml(markdown))
         }
         minEditorHeight={80}
         heightUnits="vh"
