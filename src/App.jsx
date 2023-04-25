@@ -7,20 +7,20 @@ import Editor from "./components/Editor";
 
 function App() {
   //states
-  const [notes, setNotes] = useState([]);
+  const localNotes = JSON.parse(localStorage.getItem("savedNotes"));
+  const [notes, setNotes] = useState(localNotes || []);
   const [currentNoteId, setCurrentNoteId] = useState("");
 
-  console.log(notes);
-
   //useEffect
-
+  useEffect(() => {
+    localStorage.setItem("savedNotes", JSON.stringify(notes));
+  }, [notes]);
   //functions
   const createNewNotes = () => {
     const newNote = {
       id: nanoid(),
       body: "# Type your markdowm note's title here",
     };
-    // setNotes((prevNote) => [newNote, ...prevNote]);
     setNotes((prevNote) => [...prevNote, newNote]);
     setCurrentNoteId(newNote.id);
   };
@@ -64,7 +64,7 @@ function App() {
             deleteNote={deleteCurrentNote}
           />
           {currentNoteId && notes.length > 0 && (
-            <Editor currentNote={findCurrentNote} updateNote={updateNote} />
+            <Editor currentNote={findCurrentNote()} updateNote={updateNote} />
           )}
         </Split>
       ) : (

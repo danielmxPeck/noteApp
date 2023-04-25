@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css"
+import "../App.css";
 
 const Sidebar = (props) => {
   const noteElement = props.notes.map((notes, index) => (
@@ -12,7 +12,7 @@ const Sidebar = (props) => {
       >
         <h4 className="text-snippet">{notes.body.split("\n")[0]}</h4>
         <button
-          style={{ marginRight: "10px" }}
+          className="title--delete"
           onClick={() => {
             props.deleteNote(index);
           }}

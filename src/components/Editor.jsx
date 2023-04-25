@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMde from "react-mde";
 import Showdown from "showdown";
-import "../App.css";
+import "react-mde/lib/styles/css/react-mde-all.css";
 
-const Editor = (  { currentNote, updateNote }) => {
+const Editor = ({ currentNote, updateNote }) => {
   const [selectedTab, setSelectedTab] = useState("write");
 
   const converter = new Showdown.Converter({
